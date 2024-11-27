@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Cadastro de Usuário</title>
+  </head>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+    
+    h3 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: -1vh;
+        color: #000;
+    }
+    
+    input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+        width: 86%;
+        padding: 10px;
+        margin-left: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #000;
+        border-radius: 4px;
+    }
+    select{
+      width: 88%;
+      padding: 10px;
+      margin-left: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #000;
+      border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+        display: block;
+        width: 73%; /* Ajuste a porcentagem conforme necessário */
+        padding: 10px 20px;
+        margin: 20px auto; /* Centraliza o botão no formulário */
+        border: none;
+        border-radius: 4px;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+
+
+    form {
+        max-width: 56%; /* Ajuste a porcentagem conforme necessário */
+        margin: 0 auto; /* Centraliza o formulário na tela */
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        padding: 20px;
+        padding-left: 60px;
+        background-color: #fff;
+    }
+    
+    @media screen and (max-width: 600px) {
+        form {
+            max-width: 100%;
+        }
+    }
+    .section {
+      display: inline-block;
+      width: 90%;
+      border-bottom: 1px solid black;
+  }
+  .empty {
+    border: 1px solid red !important;
+}
+.error {
+  color: red;
+  font-size: 13px;
+  padding-left: 11px;
+}
+  </style>
+  <body>
+    
+    <form
+      action="#"
+      th:action="@{/usuarios/cadastro}"
+      th:object="${usuario}"
+      method="post"
+    >
+    <h1 style="text-align: center;">Registration System</h1><br>
+    <br>
+    <div class="section">
+    <h3>Personal</h3>
+  </div><br>
+  <br>
+  
+      <label class="personal-label"  for="nome">Nome</label><br />
+      <span th:if="${erroNome}" th:text="${erroNome}" class="error"></span>
+      <input class="personal-input" placeholder="Digite Um Nome" type="text" id="nome" th:field="*{nome}" required/><br />
+      
+      
+      <label for="email">Email</label><br />
+      <span th:if="${erroEmail}" th:text="${erroEmail}" class="error"></span>
+      <input type="email" id="email" placeholder="Digite Um Email" th:field="*{email}" required/><br />
+      
+      <label for="dataNascimento">Data de Nascimento</label><br />
+      <input
+        type="date"
+        id="dataNascimento"
+        th:field="*{dataNascimento}"
+        required/><br />
+<div class="section">
+      <h3>Account</h3>
+    </div><br>
+    <br>
+      <label for="usuario">Usuário</label><br />
+      <input type="text" placeholder="Digite Um Usuario" id="usuario" th:field="*{usuario}" required/><br />
+      <label for="senha">Senha</label><br />
+      <input type="password" placeholder="Digite Uma Senha" id="senha" th:field="*{senha}" required/><br />
+      <div class="section">
+      <h3>Address</h3>
+    </div><br>
+    <br>
+      <label for="cep">CEP</label><br />
+      <input
+      placeholder="Digite Um CEP"
+        type="text"
+        id="cep"
+        th:field="*{endereco.cep}"
+        onblur="getEndereco()"
+        required/><br />
+      <label for="rua">Rua</label><br />
+      <input type="text" placeholder="Digite a Rua" id="rua" th:field="*{endereco.rua}" required/><br />
+      <label for="numero">Número</label><br />
+      <input type="text" placeholder="Digite o Numero" id="numero" th:field="*{endereco.numero}" required/><br />
+      <label for="complemento">Complemento</label><br />
+      <input
+      placeholder="Digite o Complemento"
+        type="text"
+        id="complemento"
+        th:field="*{endereco.complemento}"
+        /><br />
+      <label for="bairro">Bairro</label><br />
+      <input type="text" placeholder="Digite o Bairro" id="bairro" th:field="*{endereco.bairro}" required/><br />
+      <label for="cidade">Cidade</label><br />
+      <input type="text" placeholder="Digite a Cidade" id="cidade" th:field="*{endereco.cidade}" required/><br />
+      <label for="estado">Estado</label><br />
+      <input type="text" placeholder="Digite o Estado" id="estado" th:field="*{endereco.estado}" required/><br />
+      <div class="section">
+      <h3>Employee</h3>
+    </div><br>
+    <br>
+      
+      <label for="cargo">Cargo</label><br />
+  <select id="cargo" th:field="*{funcionario.cargo}" required>
+    <option value="">Selecione o Cargo....</option>
+    <option value="Backend">Desenvolvedor Back-End</option>
+    <option value="Frontend">Desenvolvedor Front-End</option>
+    <option value="Estagiario">Estagiario</option>
+  </select><br />
+  <label for="setor">Setor</label><br />
+  <select id="setor" th:field="*{funcionario.setor}" required>
+    <option value="">Selecione o Setor....</option>
+    <option value="T.I">Setor Tecnologia da Informação</option>
+    <option value="Financeiro">Setor Financeiro</option>
+    <option value="RH">Setor Recursos Humanos</option>
+  </select><br />
+  <label for="salario">Salário</label><br />
+  <input type="text" placeholder="Digite Um Salario" id="salario" th:field="*{funcionario.salario}" required/><br />
+  <label for="turno">Turno</label><br />
+  <select id="turno" th:field="*{funcionario.turno}" required>
+    <option value="">Selecione o Tipo....</option>
+    <option value="Matutino">Matutino (Manhã)</option>
+    <option value="Vespertino">Vespertino (Tarde)</option>
+    <option value="Noturno">Noturno (Noite)</option>
+  </select><br />
+  <label for="contrato">Contrato</label><br />
+  <select id="contrato" th:field="*{funcionario.contrato}" required>
+    <option value="">Selecione o Tipo....</option>
+    <option value="CLT">Contrato por tempo indeterminado</option>
+    <option value="Estagio">Contrato de estágio</option>
+    <option value="Temporario">Contrato temporário</option>
+    <option value="PJ">Contrato de Pessoa Jurídica</option>
+  </select><br />
+  <label for="situacao">Situação</label><br />
+  <select id="situacao" th:field="*{funcionario.situacao}" required>
+    <option value="">Selecione a situação....</option>
+    <option value="Ativo">Ativo</option>
+    <option value="Desativado">Desativado</option>
+  </select><br />
+      <input type="submit" value="Cadastrar" />
+    </form>
+  </body>
+  <script>
+    window.onload = function() {
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+              if (this.value.trim() === '') {
+                  this.classList.add('empty');
+              } else {
+                  this.classList.remove('empty');
+              }
+          });
+      });
+  };
+    function getEndereco() {
+        var cep = document.getElementById('cep').value;
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rua').value = data.logradouro;
+                document.getElementById('bairro').value = data.bairro;
+                document.getElementById('cidade').value = data.localidade;
+                document.getElementById('estado').value = data.uf;
+            })
+            .catch(error => console.error('Erro ao buscar CEP:', error));
+    }
+    </script>
+</html>

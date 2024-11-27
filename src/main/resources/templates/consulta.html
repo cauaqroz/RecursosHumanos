@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consulta de Usuário</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"] {
+        margin: 10px 0;
+        padding: 10px;
+        width: 500px; /* Aumenta a largura da barra de pesquisa */
+        border-radius: 15px; /* Adiciona cantos arredondados à barra de pesquisa */
+    }
+    
+    input[type="submit"], button {
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    
+    button {
+        margin-top: 20px;
+    }
+    
+    /* Adiciona estilos para alinhar os botões um ao lado do outro */
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 500px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<body>
+    <h1>Consulta de Funcionarios</h1>
+    <form action="#" th:action="@{/usuarios/consulta}" method="post" >
+        <input required type="text" id="nome" placeholder="Digite o nome" name="nome"><br>
+        <input type="submit" value="Buscar">
+    </form>
+    <br>
+    <br>
+    <div class="buttons">
+        <button onclick="location.href='/usuarios/listarTodos'">Listar Todos</button>
+        <button onclick="location.href='/usuarios/listarAtivos'">Listar Ativos</button>
+        <button onclick="location.href='/usuarios/listarInativos'">Listar Inativos</button>
+        <button onclick="location.href='/usuarios/cadastro'">Cadastrar</button>
+
+        <!-- Adicione mais botões aqui -->
+    </div>
+</body>
+</html>

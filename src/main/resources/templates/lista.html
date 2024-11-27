@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}" /> 
+</head>
+<body>
+
+    <h1>Lista de Funcionarios</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Nascimento</th>
+            <th>Usuário</th>
+            <th>Rua</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>CEP</th>
+            <th>Cargo</th>
+        <th>Setor</th>
+        <th>Salário</th>
+        <th>Turno</th>
+        <th>Contrato</th>
+        <th>Situação</th>
+        </tr>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nome}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.dataNascimento}"></td>
+            <td th:text="${usuario.usuario}"></td>
+            <td th:text="${usuario.endereco.rua}"></td>
+            <td th:text="${usuario.endereco.numero}"></td>
+            <td th:text="${usuario.endereco.complemento}"></td>
+            <td th:text="${usuario.endereco.bairro}"></td>
+            <td th:text="${usuario.endereco.cidade}"></td>
+            <td th:text="${usuario.endereco.estado}"></td>
+            <td th:text="${usuario.endereco.cep}"></td>
+            <td th:text="${usuario.funcionario.cargo}"></td>
+            <td th:text="${usuario.funcionario.setor}"></td>
+            <td th:text="${usuario.funcionario.salario}"></td>
+            <td th:text="${usuario.funcionario.turno}"></td>
+            <td th:text="${usuario.funcionario.contrato}"></td>
+            <td th:text="${usuario.funcionario.situacao}"></td>
+        </tr>
+    </table>
+</body>
+
+</html>
